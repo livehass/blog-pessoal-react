@@ -1,29 +1,63 @@
-import { useState, createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useState } from "react"
 
-interface UserContextType {
-  nome: string;
-  setNome: React.Dispatch<React.SetStateAction<string>>;
+import UsuarioLogin from "../models/UsuarioLogin"
+import { login } from "../services/Service"
+// import { toastAlerta } from "../utils/toastAlerta"
 
+interface AuthContextProps {
+    usuario: UsuarioLogin
+    handleLogout(): void
+    handleLogin(usuario: UsuarioLogin): Promise<void>
+    isLoading: boolean
 }
 
-export const UserContext = createContext<UserContextType>({
-  nome: '',
-  setNome: () => {}
-});
-
-interface UserProviderProps {
-  children: ReactNode;
+interface AuthProviderProps {
+    children: ReactNode
 }
 
-function UserProvider({ children }: UserProviderProps) {
-  const [nome, setNome] = useState('');
+export const AuthContext = createContext({} as AuthContextProps)
 
+export function AuthProvider({ children }: AuthProviderProps) {
 
-  return (
-    <UserContext.Provider value={{ nome, setNome}}>
-      {children}
-    </UserContext.Provider>
-  );
+    const [usuario, setUsuario] = useState<UsuarioLogin>({
+        id: 0,
+        nome: "",
+        usuario: "",
+        senha: "",
+        foto: "",
+        token: ""
+    })
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    async function handleLogin(userLogin: UsuarioLogin) {
+        setIsLoading(true)
+        try {
+            await login(`/usuarios/logar`, userLogin, setUsuario)
+            alert("Usuário logado com sucesso")
+            setIsLoading(false)
+
+        } catch (error) {
+            console.log(error)
+            alert("Dados do usuário inconsistentes")
+            setIsLoading(false)
+        }
+    }
+
+    function handleLogout() {
+        setUsuario({
+            id: 0,
+            nome: "",
+            usuario: "",
+            senha: "",
+            foto: "",
+            token: ""
+        })
+    }
+
+    return (
+        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
-
-export default UserProvider;
