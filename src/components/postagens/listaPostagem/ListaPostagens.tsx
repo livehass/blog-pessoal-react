@@ -1,63 +1,39 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Dna } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
-import Postagem from '../../../models/Postagem';
-import { buscar } from '../../../services/Service';
-import CardPostagem from '../cardPostagem/CardPostagem';
+import React from 'react';
+import './App.css';
 
-function ListaPostagens() {
-  const [postagens, setPostagens] = useState<Postagem[]>([]);
+import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/login/Login';
+import Cadastro from './pages/cadastro/Cadastro';
+import Home from './pages/home/Home';
+import { AuthProvider } from './contexts/AuthContext';
+import ListaTemas from './components/temas/listaTemas/ListaTemas';
+import FormularioTema from './components/temas/formularioTema/FormularioTema';
 
-  let navigate = useNavigate();
 
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
-
-  useEffect(() => {
-    if (token === '') {
-      alert('Você precisa estar logado');
-      navigate('/');
-    }
-  }, [token]);
-
-  async function buscarPostagens() {
-    try {
-      await buscar('/postagens', setPostagens, {
-        headers: {
-          Authorization: token,
-        },
-      });
-    } catch (error: any) {
-      if (error.toString().includes('403')) {
-        alert('O token expirou, favor logar novamente')
-        handleLogout()
-      }
-    }
-  }
-
-  useEffect(() => {
-    buscarPostagens();
-  }, [postagens.length]);
+function App() {
   return (
     <>
-      {postagens.length === 0 && (
-        <Dna
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
-      )}
-      <div className='container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {postagens.map((postagem) => (
-          <CardPostagem key={postagem.id} post={postagem} />
-        ))}
-      </div>
+    <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <div className='min-h-[80vh]'>
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/temas" element={<ListaTemas />} />
+              <Route path="/cadastroTema" element={<FormularioTema />} />
+              <Route path="/editarTema/:id" element={<FormularioTema />} />
+
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+        </AuthProvider>
     </>
   );
 }
-
-export default ListaPostagens;
+export default App;
