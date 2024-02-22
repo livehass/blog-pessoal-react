@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import Navbar from './components/NavBar/NavBar';
 import Footer from './components/footer/Footer';
@@ -8,8 +7,9 @@ import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/home/Home';
 import { AuthProvider } from './contexts/AuthContext';
 import ListaTemas from './components/temas/listaTemas/ListaTemas';
-import FormularioTema from './components/formularioTema/FormularioTema';
+import FormularioTema from './components/temas/formularioTema/FormularioTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
+
 
 
 function App() {
