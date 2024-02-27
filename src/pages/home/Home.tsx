@@ -4,8 +4,6 @@ import './Home.css';
 import ListaPostagens from '../../components/postagens/listaPostagem/ListaPostagens';
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
 
-
-
 function Home() {
     return (
         <>
