@@ -13,7 +13,6 @@ function Home() {
             <div className="flex flex-col gap-4 items-center justify-center py-4">
               <h2 className='text-5xl font-bold'>Bem vindo ao meu blog pessoal!</h2>
               <p className='text-xl'>Expresse aqui seus pensamentos e opniões</p>
-  
               <div className="flex justify-around gap-4">
               <ModalPostagem />
               <button  className='border rounded px-4 bg-blue-700  hover:text-blue-900 hover:bg-white py-2'>
@@ -24,7 +23,7 @@ function Home() {
             </div>
   
             <div className="flex justify-center ">
-              <img src="/src/assets/proglogo.png" alt="logo principal menu" className='w-2/3' />
+              <img src="./src/assets/proglogo.png" alt="logo principal menu" className='w-2/3' />
       
             </div>
           </div>
