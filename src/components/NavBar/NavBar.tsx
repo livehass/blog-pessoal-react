@@ -27,7 +27,7 @@ function Navbar() {
       <img
         src="/src/assets/react.svg"
         className="h-8"
-        alt="Flowbite Logo"
+        alt="logo react"
       />
       <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
         Livehass
