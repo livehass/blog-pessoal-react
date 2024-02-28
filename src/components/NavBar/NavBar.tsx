@@ -25,7 +25,7 @@ function Navbar() {
       className="flex items-center space-x-3 rtl:space-x-reverse"
     >
       <img
-        src="/./src/assets/react.svg"
+        src="/src/assets/react.svg"
         className="h-8"
         alt="logo react"
       />
