@@ -23,7 +23,7 @@ function Home() {
             </div>
   
             <div className="flex justify-center ">
-              <img src="/src/assets/proglogo.png" alt="logo principal menu" className='w-2/3' />
+              <img src="https://raw.githubusercontent.com/livehass/blog-pessoal-react/main/src/assets/proglogo.png" alt="logo principal menu" className='w-2/3' />
       
             </div>
           </div>
