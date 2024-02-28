@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Dna } from 'react-loader-spinner';
+import { Vortex} from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Tema from '../../../models/Tema';
@@ -41,13 +41,14 @@ function ListaTemas() {
   return (
     <>
       {temas.length === 0 && (
-        <Dna
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
+        <Vortex
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="vortex-loading"
+        wrapperStyle={{}}
+        wrapperClass="vortex-wrapper"
+        colors={['white', 'blue', 'white', 'blue', 'white', 'blue']}
         />
       )}
       <div className="flex justify-center w-full my-4">

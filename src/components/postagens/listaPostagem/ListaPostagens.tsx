@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Dna } from 'react-loader-spinner';
+import { Vortex} from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Postagem from '../../../models/Postagem';
@@ -43,21 +43,27 @@ function ListaPostagens() {
 
   return (
     <>
+    <div className='flex justify-center ...'>
       {postagens.length === 0 && (
-        <Dna
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
+        <Vortex
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="vortex-loading"
+        wrapperStyle={{}}
+        wrapperClass="vortex-wrapper"
+        colors={['white', 'blue', 'white', 'blue', 'white', 'blue']}
+
         />
       )}
-      <div className='container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+      </div>
+      <div className='container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2'>
         {postagens.map((postagem) => (
           <CardPostagem key={postagem.id} post={postagem} />
+          
         ))}
       </div>
+      
     </>
   );
 }

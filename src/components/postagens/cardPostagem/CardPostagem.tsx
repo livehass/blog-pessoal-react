@@ -8,31 +8,43 @@ interface CardPostagemProps {
 
 function CardPostagem({post}: CardPostagemProps) {
   return (
-    <div className='border-slate-900 border flex flex-col rounded overflow-hidden justify-between'>
-      <div>
-        <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
-          <img src={post.usuario?.foto} className='h-12 rounded-full' alt="" />
-          <h3 className='text-lg font-bold text-center uppercase '>{post.usuario?.nome}</h3>
-        </div>
-        <div className='p-4 '>
-          <h4 className='text-lg font-semibold uppercase'>{post.titulo}</h4>
-          <p>{post.texto}</p>
-          <p>Tema: {post.tema?.descricao}</p>
-          <p>Data: {new Intl.DateTimeFormat(undefined, {
+<div className="m-10 max-w-sm">
+  <div className="rounded-lg borderb bg-black dark:bg-gray-900 px-4 pt-8 pb-10 shadow-lg">
+    <div className="relative mx-auto w-36 rounded-full">
+      <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2" />
+      <img
+        className="mx-auto h-auto w-full rounded-full"
+        src={post.usuario?.foto}
+        alt="foto-usuario"
+      />
+    </div>
+    <h1 className="my-1 text-center text-x2 font-bold leading-8 text-white hover:text-blue-600">
+      {post.usuario?.nome}
+    </h1>
+    <h3 className="font-lg text-semibold text-center leading-6 text-lg text-white  ">
+    {post.titulo}
+    </h3>
+    <p className="text-center text-sm leading-6 text-white hover:text-blue-600">
+    {post.texto}
+    </p>
+    <ul className="mt-3 divide-y rounded dark:bg-gray-700 py-2 px-3 text-white shadow-sm hover:text-blue-700 hover:bg-white hover:shadow">
+      <li className="flex items-center py-1 text-sm ">
+      Data: {new Intl.DateTimeFormat(undefined, {
                     dateStyle: 'full',
                     timeStyle: 'medium',
-                  }).format(new Date(post.data))}</p>
-        </div>
-      </div>
-      <div className="flex">
-      <Link to={`/editarPostagem/${post.id}`} className='w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2'>
+                  }).format(new Date(post.data))}
+        
+      </li>
+    </ul>
+    <Link to={`/editarPostagem/${post.id}`} className='m-3 ml-5 inline-flex items-center justify-center rounded-xl border border-transparent bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700'>
           <button>Editar</button>
         </Link>
-        <Link to={`/deletarPostagem/${post.id}`} className='text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center'>
+        <Link to={`/deletarPostagem/${post.id}`} className='m-3 ml-5 inline-flex items-center justify-center rounded-xl border bg-white px-6 py-3 font-medium text-blue-600 shadow hover:bg-blue-50'>
           <button>Deletar</button>
         </Link>
-      </div>
-    </div>
+  </div>
+</div>
+
   )
 }
 
